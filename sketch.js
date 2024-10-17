@@ -1,45 +1,61 @@
-// fantasia, aventura, drama
-
-// a viagem de chihiro, LIVRE, fantasia, aventura
-// paddington, LIVRE, fantasia, aventura
-// as aventuras de pi, 10, drama, fantasia, aventura
-// depois da chuva, 10, drama
-// guardiões da galáxia, 12, fantasia, aventura
-// ladrões de bicicleta, 12, drama
-// o menino que descobriu o vento, 14, drama
+//cruella 12,comedia , aventura
+//procurando nemo , livre , aventura, comedia 
+//a freira , 14, terror , misterio 
+//enola holmes , 12 , misterio 
+//meu malvado favorito 4,10, comedia , infantil
+//a noiva cadaver, livre, fantasia 
+//coraline e o mundo secreto , 10, terror fantasia 
 function setup() {
-  createCanvas(800, 400);
+  createCanvas(400, 400);
 }
 
 function draw() {
-  background(200);
-}
-function draw() {
-    background(220);
-    let recomendacao = "A viagem de Chihiro";
-    text(recomendacao, width/2, height/2);
-}let campoIdade;
+  background(220);
+let campoIdade;
+let campoFantasia;
+let campoAventura;
 
 function setup() {
   createCanvas(800, 400);
-  campoIdade = createInput("15");
-}
+  createElement("h2", "Recomendador de filmes");
+  createSpan("Sua idade:");
+  campoIdade = createInput("5");
+  campoFantasia = createCheckbox("Gosta de fantasia?");
+  campoAventura = createCheckbox("Gosta de aventura?");
+}function draw() {
+  background("white");
+  let idade = campoIdade.value();
+  let gostaDeFantasia = campoFantasia.checked();
+  let gostaDeAventura = campoAventura.checked();
+  let recomendacao = geraRecomendacao(idade, gostaDeFantasia, gostaDeAventura);
 
-function draw() {
-  background(200);
-  let idade = 15; // exemplo de idade
-  let recomendacao = geraRecomendacao(idade);
+  fill(color(76, 0, 115));
+  textAlign(CENTER, CENTER);
+  textSize(38);
   text(recomendacao, width / 2, height / 2);
-}
-
-function geraRecomendacao(idade) {
+}function geraRecomendacao(idade, gostaDeFantasia) {
   if (idade >= 10) {
     if (idade >= 14) {
       return "O menino que descobriu o vento";
     } else {
-      return "As aventuras de Pi";
+      if (idade >= 12) {
+        if(gostaDeFantasia) {
+          return "Homem aranha: no aranhaverso";          
+        } else{
+         return "Ladrões de bicicleta";
+        }
+      } else {
+        if (gostaDeFantasia) {
+          return "As aventuras de pi";
+        } else {
+          return "Depois da chuva";
+        }
+      }
     }
   } else {
-    return "A viagem de Chihiro";
+    if (gostaDeFantasia) {
+      return "A viagem de chihiro";
+    } else {
+      return "O feitiço do tempo";
+    }
   }
-}
